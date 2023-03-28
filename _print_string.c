@@ -16,7 +16,10 @@ int _print_string(va_list ap, flag_t __attribute__ ((unused)) *f, int __attribut
 			len += _write('\\');
 			len += _write('x');
 			len += _write('0');
-			len += _write((s[i] % 16) + 87);
+			if (s[i] > 9)
+				len += _write((s[i] % 16) + 87);
+			else
+				len += _write((s[i] % 16) + '0');
 		}
 		else
 			len += _write(s[i]);
