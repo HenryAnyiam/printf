@@ -40,9 +40,9 @@ int convert(int base, unsigned long int i, int c, flag_t *f, int sign, int pre)
 		s = (char *) _realloc(s, (j + 2), (j + 3));
 		++j;
 	}
-	--j;
 	if (f->hash == 1)
 	{
+		j--;
 		if ((base == 16) && (c == 0))
 		{
 			s[j] = 'x';
