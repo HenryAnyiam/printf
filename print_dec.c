@@ -8,37 +8,16 @@
   *)
   *Return: length of integer printed
   */
-int print_dec(int i)
+int print_dec(va_list ap, flag_t *f, int i)
 {
-	int len, temp;
-	char *s;
+	int c;
+	int a = va_arg(ap, int);
 
-	len = 0;
-	if (i < 0)
+	c = 1;
+	if (a < 0)
 	{
-		len += _write('-');
-		i *= -(1);
+		c = 0;
+		a *= -(1);
 	}
-	if (i == 0)
-	{
-		len += _write('0');
-		return (len);
-	}
-	temp = 0;
-	s = malloc(sizeof(char) * 2);
-	while (i > 0)
-	{
-		s[temp] = ((i % 10) + '0');
-		i /= 10;
-		s = (char *) _realloc(s, (temp + 2), (temp + 3));
-		++temp;
-	}
-	--temp;
-	while (temp >= 0)
-	{
-		len += _write(s[temp]);
-		--temp;
-	}
-	free(s);
-	return (len);
+	return (convert(10, a, 0, f, c, i));
 }

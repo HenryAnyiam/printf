@@ -11,58 +11,43 @@
   */
 int _printf(const char *format, ...)
 {
-	fmt ft[] = {
-		{'b', print_bin},
-		{'u', print_ui},
-		{'o', print_oct},
-		{'x', print_hex},
-		{'X', _print_hex},
-		{'\0', NULL}
-	};
-	unsigned int len, i, j;
+	flag_t flag = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+	int len, i, c;
+	int (*func)(va_list, flag_t *, int);
 	va_list arg;
 
 	if (format == NULL)
 		return (0);
 	va_start(arg, format);
-	i = 0;
-	len = 0;
+	i = c = len = 0;
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
 		{
-			++i;
+			i++;
+			while (flags(format[i], &flag))
+				i++;
+			while ((format[i] >= '0') && (format[i] <= '9'))
+			{
+				c *= 10;
+				c += format[i] - '0';
+				++i;
+			}
+			if (flag.star == 1)
+				c = va_arg(arg, int);
+			func = funcs(format[i]);
 			if (format[i] == '%')
-				len += _write(format[i]);
-			else if (format[i] == 'c')
-				len += _write(va_arg(arg, int));
-			else if (format[i] == 's')
-				len += print_string(va_arg(arg, char *));
-			else if ((format[i] == 'd') || (format[i] == 'i'))
-				len += print_dec(va_arg(arg, int));
-			else if ((format[i] == 'b') || (format[i] == 'u') || (format[i] == 'o')
-					|| (format[i] == 'x') || (format[i] == 'X'))
-			{
-				j = 0;
-				while (j < 5)
-				{
-					if (format[i] == ft[j].c)
-					{
-						len += ft[j].f(va_arg(arg, unsigned int));
-						break;
-					}
-					++j;
-				}
-			}
+				len += _write('%');
+			else if (func != NULL)
+				len += func(arg, &flag, c);
 			else
-			{
-				len += _write(format[i - 1]);
-				len += _write(format[i]);
-			}
+				len += _printf("%%%c", format[i]);
 		}
 		else
 			len += _write(format[i]);
-		++i;
+		reset(&flag);
+		c = 0;
+		i++;
 	}
 	va_end(arg);
 	_write(-1);

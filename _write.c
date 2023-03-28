@@ -9,12 +9,12 @@
 */
 int _write(char c)
 {
-	static char buffer(1024);
+	static char buffer[1024];
 	static int i;
 
 	if (c == -1 || (i == 1024))
 	{
-		write(i, &buffer, i);
+		write(1, &buffer, i);
 		i = 0;
 	}
 	if (c != -1)
@@ -22,5 +22,21 @@ int _write(char c)
 		buffer[i] = c;
 		i++;
 	}
+	return (1);
+}
+
+/**
+  *_writes - writes string
+  *@s: string
+  *)
+  *Return: length of string
+  */
+int _writes(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i += _write(s[i]);
 	return (i);
 }
