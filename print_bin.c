@@ -12,7 +12,9 @@
   */
 int print_bin(va_list ap, flag_t *f, int i)
 {
-	int a = va_arg(ap, int);
+	unsigned int a = va_arg(ap, unsigned int);
 
+	if (!a)
+		return (_printf("%%%c", 'b'));
 	return (convert(2, a, 0, f, 1, i));
 }
