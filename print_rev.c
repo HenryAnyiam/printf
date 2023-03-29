@@ -15,7 +15,7 @@ int print_rev(va_list ap, flag_t __attribute__ ((unused)) *f, int i)
 	char *a = va_arg(ap, char *);
 
 	if (a == NULL)
-		return (_printf("%%%c", 'r'));
+		return (_writes("(null)"));
 	for (i = 0; a[i] != '\0'; i++)
 		;
 	len = 0;

@@ -16,8 +16,8 @@ int print_string(va_list ap, flag_t *f, int i)
 	char fill = ' ';
 	char *s = va_arg(ap, char *);
 
-	if (s == NULL)
-		return (_printf("%%%c", 's'));
+	if (!s)
+		return (_writes("(null)"));
 	a = 0;
 	if (f->zero == 1)
 		fill = '0';
@@ -57,7 +57,7 @@ int print_char(va_list ap, flag_t *f, int i)
 	char fill = ' ';
 
 	if (!s)
-		return (_printf("%%%c", 'c'));
+		return (_writes("(null)"));
 	len = 0;
 	if (f->zero == 1)
 		fill = '0';
