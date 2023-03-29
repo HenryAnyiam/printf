@@ -40,25 +40,26 @@ int convert(int base, unsigned long int i, int c, flag_t *f, int sign, int pre)
 		s = (char *) _realloc(s, (j + 2), (j + 3));
 		++j;
 	}
+	s = (char *) _realloc(s, (j + 2), (j + 3));
 	if (f->hash == 1)
 	{
 		j--;
 		if ((base == 16) && (c == 0))
 		{
-			s[j] = 'x';
-			s[j + 1] = '0';
-			j++;
+			s[j + 1] = 'x';
+			s[j + 2] = '0';
+			j += 3;
 		}
 		else if ((base == 16) && (c == 1))
 		{
-			s[j] = 'X';
-			s[j + 1] = '0';
-			j++;
+			s[j + 1] = 'X';
+			s[j + 2] = '0';
+			j += 3;
 		}
 		else if (base == 8)
 		{
-			s[j] = '0';
-			j++;
+			s[j + 1] = '0';
+			j += 2;
 		}
 	}
 	return (_writes(add_flag(s, f, (j - 1), sign, pre)));

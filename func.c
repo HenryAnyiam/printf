@@ -20,13 +20,13 @@ int (*funcs(char s))(va_list, flag_t *, int i)
 		{'x', print_hex},
 		{'X', _print_hex},
 		{'S', _print_string},
-/*		{'p', print_addr},*/
+		{'p', print_addr},
 		{'r', print_rev},
 		{'R', print_rot}
 	};
 	int i;
 	
-	for (i = 0; i < 12; i++)
+	for (i = 0; i < 13; i++)
 	{
 		if (s == func[i].c)
 			return (func[i].f);

@@ -15,7 +15,7 @@ char *add_flag(char *s, flag_t *f, int len, int c, int i)
 {
 	char *t;
 	char fill = ' ';
-	int a;
+	int a, temp;
 
 	if (f->zero == 1)
 		fill = '0';
@@ -34,20 +34,21 @@ char *add_flag(char *s, flag_t *f, int len, int c, int i)
 		++len;
 		s[len] = ' ';
 	}
-	if ((f->minus == 0) && (i > len))
+	if ((f->minus == 0) && (i > (len + 1)))
 	{
 		t = malloc(sizeof(char) * (len + (i - len) + 1));
-		for (a = 0; i > len; i--, a++)
+		for (a = 0; i > (len + 1); i--, a++)
 			t[a] = fill;
 		for (; len >= 0; len--, a++)
 			t[a] = s[len];
 	}
-	else if ((f->minus == 1) && (i > len))
+	else if ((f->minus == 1) && (i > (len + 1)))
 	{
 		t = malloc(sizeof(char) * (len + (i - len) + 1));
+		temp = len;
 		for (a = 0; len >= 0; len--, a++)
 			t[a] = s[len];
-		for (; i > len; i--, a++)
+		for (; i > (temp + 1); i--, a++)
 			t[a] = fill;
 	}
 	else if (i <= len)
