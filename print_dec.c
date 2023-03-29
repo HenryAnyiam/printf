@@ -4,14 +4,16 @@
 
 /**
   *print_dec: prints out integer to standard output
-  *@i: integer to print
+  *@ap: integer to print
+  *@f: flag characters
+  *@i: precision
   *)
   *Return: length of integer printed
   */
 int print_dec(va_list ap, flag_t *f, int i)
 {
 	int c;
-	int a = va_arg(ap, int);
+	long int a = va_arg(ap, int);
 
 	c = 1;
 	if (a < 0)

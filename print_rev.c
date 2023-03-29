@@ -41,6 +41,8 @@ int print_rot(va_list ap, flag_t __attribute__ ((unused)) *f, int i)
 	char *r = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
 	char *new;
 
+	if (a == NULL)
+		return (_printf("%%%c", 'R'));
 	new = malloc(sizeof(char) * 2);
 	for (i = 0; a[i] != '\0'; i++)
 	{

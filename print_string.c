@@ -3,19 +3,20 @@
 #include <stdlib.h>
 
 /**
- * print_string - print a string
- * @a: string
- * Return: length of the string
-*/
+  *print_string - prints the string format
+  *@ap: string argument
+  *@f: flag characters
+  *@i: precision
+  *)
+  *Return: length
+  */
 int print_string(va_list ap, flag_t *f, int i)
 {
 	int a, j, len;
 	char *s = va_arg(ap, char *);
 
 	if (s == NULL)
-	{
-		return (0);
-	}
+		return (_printf("%%%c", 's'));
 	a = 0;
 	len = 0;
 	while (s[a] != '\0')
@@ -38,18 +39,31 @@ int print_string(va_list ap, flag_t *f, int i)
 	return (len);
 }
 
+/**
+  *print_char - prints character format
+  *@ap: string argument
+  *@f: flag chracters
+  *@i: precision
+  *)
+  *Return: length
+  */
 int print_char(va_list ap, flag_t *f, int i)
 {
 	int len;
 	char s = va_arg(ap, int);
+	char fill = ' ';
 
+	if (c == NULL)
+		return (_printf("%%%c", 'c'));
 	len = 0;
+	if (f->zero == 1)
+		fill = '0';
 	if ((i > 1) && (f->minus == 0))
-		for (; i > 0; --i)
+		for (; i > 1; --i)
 			len += _write(' ');
 	len += _write(s);
 	if ((i > 1) && (f->minus == 1))
-		for (; i > 0; --i)
+		for (; i > 1; --i)
 			len += _write(' ');
 	return (len);
 }
