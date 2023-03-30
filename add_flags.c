@@ -21,7 +21,8 @@ char *add_flag(char *s, flag_t *f, int len, int c, int i)
 		fill = '0';
 	if (c == 0)
 	{
-		len += _write('-');
+		++len;
+		s[len] = '-';
 	}
 	if ((c == 1) && (f->plus == 1))
 	{
