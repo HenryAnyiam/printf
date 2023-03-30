@@ -17,12 +17,11 @@ char *add_flag(char *s, flag_t *f, int len, int c, int i)
 	char fill = ' ';
 	int a, temp;
 
-	if (f->zero == 1)
+	if ((f->zero == 1) || (f->period == 1))
 		fill = '0';
 	if (c == 0)
 	{
-		++len;
-		s[len] = '-';
+		len += _write('-');
 	}
 	if ((c == 1) && (f->plus == 1))
 	{
@@ -37,6 +36,8 @@ char *add_flag(char *s, flag_t *f, int len, int c, int i)
 	if ((f->minus == 0) && (i > (len + 1)))
 	{
 		t = malloc(sizeof(char) * (len + (i - len) + 1));
+		if (t == NULL)
+			return (NULL);
 		for (a = 0; i > (len + 1); i--, a++)
 			t[a] = fill;
 		for (; len >= 0; len--, a++)
@@ -45,6 +46,8 @@ char *add_flag(char *s, flag_t *f, int len, int c, int i)
 	else if ((f->minus == 1) && (i > (len + 1)))
 	{
 		t = malloc(sizeof(char) * (len + (i - len) + 1));
+		if (t == NULL)
+			return (NULL);
 		temp = len;
 		for (a = 0; len >= 0; len--, a++)
 			t[a] = s[len];
@@ -54,6 +57,8 @@ char *add_flag(char *s, flag_t *f, int len, int c, int i)
 	else if (i <= len)
 	{
 		t = malloc(sizeof(char) * (len + 1));
+		if (t == NULL)
+			return (NULL);
 		for (a = 0; len >= 0; len--, a++)
 			t[a] = s[len];
 	}

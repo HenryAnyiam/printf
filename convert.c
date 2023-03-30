@@ -19,6 +19,8 @@ int convert(int base, unsigned long int i, int c, flag_t *f, int sign, int pre)
 
 	j = 0;
 	s = malloc(sizeof(char) * 2);
+	if (s == NULL)
+		return (-1);
 	if (i == 0)
 	{
 		s[0] = '0';

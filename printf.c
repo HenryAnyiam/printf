@@ -16,7 +16,7 @@ int _printf(const char *format, ...)
 	int (*func)(va_list, flag_t *, int);
 	va_list arg;
 
-	if ((format == NULL) || ((format[0] == '%') && (!format[1])))
+	if ((!format) || ((format[0] == '%') && (!format[1])))
 		return (-1);
 	if ((format[0] == '%') && (format[1] == ' ') && (!format[2]))
 		return (-1);
